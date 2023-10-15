@@ -111,6 +111,14 @@ header {
   margin-block-start: 0;
   margin-block-end: 0;
 }
+.filter {
+  display: flex;
+  justify-content: center;
+}
+
+.filter > button {
+  background-color: #62807e;
+}
 
 .tasks > li {
   display: flex;
