@@ -1,20 +1,18 @@
-import assert from "assert";
+import { Meteor } from 'meteor/meteor';
+import { TasksCollection } from '/imports/api/TasksCollection';
 
-describe("simple-todos", function () {
-  it("package.json has correct name", async function () {
-    const { name } = await import("../package.json");
-    assert.strictEqual(name, "simple-todos");
-  });
+const insertTask = taskText => TasksCollection.insert({ text: taskText });
 
-  if (Meteor.isClient) {
-    it("client is not server", function () {
-      assert.strictEqual(Meteor.isServer, false);
-    });
-  }
-
-  if (Meteor.isServer) {
-    it("server is not client", function () {
-      assert.strictEqual(Meteor.isClient, false);
-    });
+Meteor.startup(() => {
+  if (TasksCollection.find().count() === 0) {
+    [
+      'First Task',
+      'Second Task',
+      'Third Task',
+      'Fourth Task',
+      'Fifth Task',
+      'Sixth Task',
+      'Seventh Task'
+    ].forEach(insertTask)
   }
 });
